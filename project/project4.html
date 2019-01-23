@@ -24,6 +24,57 @@
                 let dataset = [[100,100,0,0],[100,100,100,0],[100,100,0,100],[100,100,100,100]]
                 let w = 1000;
                 let h = 1000;
+
+
+                    function topLeftWeb(){
+                              let a = dataset;//get old data set
+                              let b = [100,100,0,0];//variable im going to change it by
+                              let newDataset = a.map(function(x,i){  //i don't know howthis works but i add datasets
+                                  return x.map(function(y,j){
+                                      return y+b[j];
+                                                  });
+                                              
+                                             });
+                            //that changed the old data set
+                               newDataset.push([100,100,0,0]);  //then i add new datapoints
+                               newDataset.push([100,100,100,0]);
+                               newDataset.push([100,100,0,100]);
+
+                               console.log(newDataset); //check that shit out
+
+                               dataset = newDataset; //then i put it over here
+
+
+                                  var clicked = svg.selectAll("circles")			//Select all bars
+                                       .data(dataset);	//this keeps all the circles with their old id's 
+
+
+
+                                   clicked.enter()  //then it updates everything
+                                   .append("circle")
+                                   .attr("cx", function(d) {
+                                       return d[0]+d[2];
+                                   })
+                                  .attr("cy", function(d){
+                                      return d[1]+d[3];
+                                  })
+                                  .attr("r", 15)
+                                  .attr("fill","yellow")
+                                  .attr("stroke","orange")
+                                  .attr("id", function(d,i){
+                                      return "circle" +i;
+                                  });
+
+
+              let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -3))
+                          .attr("fill","green")
+                           .on("click", topLeftWeb);
+
+                            }
+
+
+
+
                 //creates the canvas
                 var svg = d3.select("body")
 						.append("svg")
@@ -57,143 +108,17 @@
                    });
                    
 //this one is the top right circle that builds web out like a r shape
-            var topRightCircle = svg.select("#circle0")
+            var topLeftCircle = svg.select("#circle0")
                                     .attr("fill","green");
 //build more web
-            topRightCircle.on("click",function buildMoreWeb(){
-                 let a = dataset;//get old data set
-                 let b = [100,100,0,0];//variable im going to change it by
-                 let newDataset = a.map(function(x,i){  //i don't know howthis works. 
-                     return x.map(function(y,j){
-                         return y+b[j];
-                                     });
-                
-                                });
-                
-                newDataset.push([100,100,0,0]);  //then i create the new nodes
-                newDataset.push([100,100,100,0]);
-                newDataset.push([100,100,0,100]);
-
-                console.log(newDataset);
-
-                dataset = newDataset;
-                  
-                
-                   var clicked = svg.selectAll("circles")			//Select all bars
-						.data(dataset);	//this keeps all the circles with their old id's 
-
-                        
-                    
-                    clicked.enter()  //then it updates everything
-                    .append("circle")
-                    .attr("cx", function(d) {
-						return d[0]+d[2];
-					})
-				   .attr("cy", function(d){
-                       return d[1]+d[3];
-                   })
-				   .attr("r", 15)
-                   .attr("fill","yellow")
-                   .attr("stroke","orange")
-                   .attr("id", function(d,i){
-                       return "circle" +i;
-                   });
-
-                   //now i need to add a new node so it can iterate on itself
-
-
-
-            });
-
-            var topLeftCircle = svg.select("#circle1")
-                                    .attr("fill","red");
-                                    topRightCircle.on("click",function buildMoreWeb(){
-                 let a = dataset;
-                 let b = [100,100,0,0];
-                 let newDataset = a.map(function(x,i){
-                     return x.map(function(y,j){
-                         return y+b[j];
-                                     });
-                
-                                });
-                
-                newDataset.push([100,100,0,0]);
-                newDataset.push([100,100,100,0]);
-                newDataset.push([100,100,0,100]);
-
-                console.log(newDataset);
-
-                dataset = newDataset;
-                  
-                
-                   var clicked = svg.selectAll("circles")			//Select all bars
-						.data(dataset);	
-
-                        
-                    
-                    clicked.enter()
-                    .append("circle")
-                    .attr("cx", function(d) {
-						return d[0]+d[2];
-					})
-				   .attr("cy", function(d){
-                       return d[1]+d[3];
-                   })
-				   .attr("r", 15)
-                   .attr("fill","yellow")
-                   .attr("stroke","orange")
-                   .attr("id", function(d,i){
-                       return "circle" +i;
-                   });
-
-                let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -3))
-                                        .attr("fill","green")
-                                        .on("click",function buildMoreWeb(){ 
-                                            let a = dataset;
-                                            let b = [100,100,0,0];
-                                            let newDataset = a.map(function(x,i){
-                                             return x.map(function(y,j){
-                                            return y+b[j];
-                                                 });
-                
-                                                 });
-                
-                newDataset.push([100,100,0,0]);
-                newDataset.push([100,100,100,0]);
-                newDataset.push([100,100,0,100]);
-
-                console.log(newDataset);
-
-                dataset = newDataset;
-                  
-                
-                   var clicked = svg.selectAll("circles")			//Select all bars
-						.data(dataset);	
-
-                        
-                    
-                    clicked.enter()
-                    .append("circle")
-                    .attr("cx", function(d) {
-						return d[0]+d[2];
-					})
-				   .attr("cy", function(d){
-                       return d[1]+d[3];
-                   })
-				   .attr("r", 15)
-                   .attr("fill","yellow")
-                   .attr("stroke","orange")
-                   .attr("id", function(d,i){
-                       return "circle" +i;
-                   });
-
-                let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -3))
-                                        .attr("fill","green")
-                                        .on("click",function buildMoreWeb(){});});});
-
-
-
+            topLeftCircle.on("click", topLeftWeb);
             
+       
+
+            var topRightCircle = svg.select("#circle1")
+                                    .attr("fill","red");
+                                  
+
 
             var bottomRightCircle = svg.select("#circle2")
                                     .attr("fill","orange");
@@ -202,15 +127,6 @@
 
             var bottomLeftCircle = svg.select("#circle3")
                                     .attr("fill","purple");
-
-            
-
-            
-
-
-
-
-
 
 
 
