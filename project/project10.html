@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Adding and removing values from a chart (dynamic labels included)</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */
+		</style>
+	</head>
+	<body>
+	
+		<p id="add">Add a new data value</p>
+		<p id="remove">Remove a data value</p>
+			
+		<script type="text/javascript">
+			//Width and height
+			var w = 600;
+			var h = 250;
+			var fat = 50;
+			
+			var dataset = [ { key: 0, xValue: 100, yValue:100, dxValue:0,dyValue:0 },		//dataset is now an array of objects.
+							{ key: 1, xValue: 100, yValue:100, dxValue:100,dyValue:0  },		//Each object has a 'key' and a 'value'.
+							{ key: 2, xValue: 13,  yValue:100, dxValue:100,dyValue:100  },
+							{ key: 3, xValue: 19,  yValue:100, dxValue:0,dyValue:100  }
+							];
+			
+			
+			//Define key function, to be used when binding data
+			var key = function(d) {
+				return d.key;
+			};
+			
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+			//Create bars
+			svg.selectAll("rect")
+			   .data(dataset, key)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d) {
+			   		return (d.xValue + d.dxValue);
+			   })
+			   .attr("y", function(d) {
+			   		return d.yValue+d.yValue;
+			   })
+			   .attr("width", 40)
+			   .attr("height", 40)
+			   .attr("fill", function(d) {
+					return "rgb(0, "+ ((d.yValue+d.dyValue)/10) + ", " + ((d.xValue+d.dxValue)/10) + ")";
+			   });
+			//Create labels
+			svg.selectAll("text")
+			   .data(dataset, key)
+			   .enter()
+			   .append("text")
+			   .text(function(d) {
+			   		return d.key;
+			   })
+			   .attr("text-anchor", "middle")
+			   .attr("x", function(d) {
+			   		return (d.xValue + d.dxValue) + 5;
+			   })
+			   .attr("y", function(d) {
+			   		return (d.yValue +d.dyValue) + 14;
+			   })
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "11px")
+			   .attr("fill", "white");
+			//On click, update with new data			
+			d3.selectAll("p")
+				.on("click", function() {
+					//See which p was clicked
+					var paragraphID = d3.select(this).attr("id");
+					
+					//Decide what to do next
+					if (paragraphID == "add") {
+						//Add a data value
+						var minValue = 2;
+						var maxValue = 25 - minValue;
+						var newNumber = Math.floor(Math.random() * maxValue) + minValue;
+						var lastKeyValue = dataset[dataset.length - 1].key;
+						dataset.push({
+							key: lastKeyValue + 1,
+							xValue: 100,
+							yValue: 100,
+							dxValue:0,
+							dyValue:0
+						});
+						lastKeyValue++;
+						dataset.push({
+							key: lastKeyValue + 1,
+							xValue: 100,
+							yValue: 100,
+							dxValue:0,
+							dyValue:0
+						});
+						lastKeyValue++;
+						dataset.push({
+							key: lastKeyValue + 1,
+							xValue: 100,
+							yValue: 100,
+							dxValue:0,
+							dyValue:0
+						});
+					} else {
+						//Remove a value
+						dataset.shift();	//Remove one value from dataset
+					}
+					
+					//Update scale domains
+					
+					//Select…
+					var bars = svg.selectAll("rect")
+						.data(dataset, key);
+					
+					//Enter…
+					bars.enter()
+						.append("rect")
+						.attr("x", w)
+						.attr("y", function(d) {
+							return (d.yValue+d.dyValue);
+						})
+						.attr("fill", function(d) {
+							return "rgb(0, "+ ((d.yValue+d.dyValue)/10) + ", " + ((d.xValue+d.dxValue)/10) + ")";
+						})
+						.merge(bars)	//Update…
+						.transition()
+						.duration(500)
+						.attr("x", function(d) {
+							return (d.xValue+d.dyValue);
+						})
+						.attr("y", function(d) {
+							return (d.yValue+d.dyValue);
+						})
+		
+					
+					//Enter…
+					labels.enter()
+						.append("text")
+						.text(function(d) {
+							return d.key;
+						})
+						.attr("text-anchor", "middle")
+						.attr("x", w)
+						.attr("y", function(d) {
+							return (d.yValue+d.dyValue);
+						})						
+					   .attr("font-family", "sans-serif")
+					   .attr("font-size", "11px")
+					   .attr("fill", "white")
+					   .merge(labels)	//Update…
+					   .transition()
+					   .duration(500)
+					   .attr("x", function(d) {
+							return (d.xValue+d.dyValue);
+						})
+						.attr("y", function(d) {
+							return (d.yValue+d.dyValue);
+						});
+				});
+			
+		</script>
+	</body>
+</html>

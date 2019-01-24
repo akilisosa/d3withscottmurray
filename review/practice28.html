@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D2 page template</title>
+        <script type="text/javascript" src="../node_modules/d3/dist/d3.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+        d3.select("body")
+        .append("p")
+        .text("new Paragraph!");
+        //your beautiful D3 code will go here
+        var hashmap = {"aaa":15, "bbb":20};
+console.log("before:");
+console.log(hashmap);
+
+Object.values(hashmap).forEach(function(key) {
+  var newValue = Object.values(hashmap) + 10;
+  hashmap[newValue] = hashmap[key];
+  delete hashmap[key];
+});
+
+console.log("after:");
+console.log(hashmap);
+
+        </script>
+    </body>
+</html>
