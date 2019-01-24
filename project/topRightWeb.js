@@ -1,16 +1,24 @@
-function topLeftWeb(){
+function topRightWeb(){
     let a = dataset;//get old data set
-    let b = [100,100,0,0];//variable im going to change it by
+    let b = [0,100,0,0];//variable im going to change it by
     let newDataset = a.map(function(x,i){  //i don't know howthis works but i add datasets
         return x.map(function(y,j){
             return y+b[j];
                         });
    
                    });
+
+
+
+    let topRightBranch = [100, 100, topRightVariable, 0];
+    let topRightLeftBranch = [100,100,topRightVariable+100,0];
+    let topRightBottomBranch = [100, 100, topRightVariable+100,topRightVariable];
+
+    
    //that changed the old data set
-   newDataset.push([100,100,0,0]);  //then i add new datapoints
-   newDataset.push([100,100,100,0]);
-   newDataset.push([100,100,0,100]);
+   newDataset.push(topRightBranch);  //then i add new datapoints
+   newDataset.push(topRightLeftBranch);
+   newDataset.push(topRightBottomBranch);
 
    console.log(newDataset); //check that shit out
 
@@ -37,7 +45,9 @@ function topLeftWeb(){
           return "circle" +i;
       });
 
-      let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -3))
+      rightVariable++;
+
+      let newTopRightCircle = svg.select("#circle"+ ( dataset.length -3))
       .attr("fill","green")
-      .on("click", topLeftWeb);
+      .on("click", topRight);
 }

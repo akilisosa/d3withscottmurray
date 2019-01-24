@@ -19,11 +19,30 @@
         <button onclick="buildWeb()">build web</button>
         <script type="text/javascript">
         
+
+        let dataset = [[100,100,0,0],[100,100,100,0],[100,100,0,100],[100,100,100,100]];
+        let rightVariable = 1;
             function buildWeb(){
 
-                let dataset = [[100,100,0,0],[100,100,100,0],[100,100,0,100],[100,100,100,100]]
+                
                 let w = 1000;
                 let h = 1000;
+
+                    function mutateTopLeftData(){
+                        let a = dataset;//get old data set
+                              let b = [100,100,0,0];//variable im going to change it by
+                              let newDataset = a.map(function(x,i){  //i don't know howthis works but i add datasets
+                                  return x.map(function(y,j){
+                                      return y+b[j];
+                                                  });
+                                              
+                                             });
+                        newDataset.push([100,100,0,0]);  //then i add new datapoints
+                        newDataset.push([100,100,100,0]);
+                        newDataset.push([100,100,0,100]);
+
+                        return dataset = newDataSet;
+                    }
 
 
                     function topLeftWeb(){
@@ -75,6 +94,69 @@
 
 
 
+        function topRightWeb(){
+                let a = dataset;//get old data set
+                let b = [0,100,0,0];//variable im going to change it by
+                let newDataset = a.map(function(x,i){  //i don't know howthis works but i add datasets
+                    return x.map(function(y,j){
+                        return y+b[j];
+                                    });
+                                
+                               });
+            let topRightVariable = rightVariable*100;
+
+                let topRightBranch = [100, 100, topRightVariable, 0];
+                let topRightLeftBranch = [100,100,topRightVariable+100,0];
+                let topRightBottomBranch = [100, 100, topRightVariable+100,100];
+
+    
+               //that changed the old data set
+               newDataset.push(topRightBranch);  //then i add new datapoints
+               newDataset.push(topRightLeftBranch);
+               newDataset.push(topRightBottomBranch);
+
+               console.log(newDataset); //check that shit out
+
+                dataset = newDataset;//then i put it over here
+     
+   
+               var clicked = svg.selectAll("circle")			//Select all bars
+                               .data(dataset);	//this keeps all the circles with their old id's 
+
+           
+       
+                   clicked.enter()  //then it updates everything
+                           .append("circle")
+                             .attr("cx", function(d) {
+                               return d[0]+d[2];
+                                     })
+                             .attr("cy", function(d){
+                              return d[1]+d[3];
+                                 })
+                             .attr("r", 15)
+                             .attr("fill","yellow")
+                             .attr("stroke","orange")
+                             .attr("id", function(d,i){
+                                 return "circle" +i;
+                                      });
+
+        rightVariable++;
+
+      let newTopRightCircle = svg.select("#circle"+ ( dataset.length -2))
+      .attr("fill","green")
+      .on("click", topRightWeb);
+}
+
+
+
+
+
+
+
+
+
+
+
                 //creates the canvas
                 var svg = d3.select("body")
 						.append("svg")
@@ -118,13 +200,7 @@
             var topRightCircle = svg.select("#circle1")
                                     .attr("fill","red");
 
-            topRightCircle.on("click", function topRightWeb(){
-
-                check 
-
-                let a = dataset;//get old data set
-                let b = [100,100,0,0];
-            });
+            topRightCircle.on("click",topRightWeb);
                                   
 
 
