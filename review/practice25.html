@@ -88,7 +88,7 @@
 					//Enter…
 					bars.enter()								//References the enter selection (a subset of the update selection)
 						.append("rect")							//Creates a new rect
-						.attr("x", 15)							//Sets the initial x position of the rect beyond the far right edge of the SVG
+						.attr("x", w)							//Sets the initial x position of the rect beyond the far right edge of the SVG
 						.attr("y", function(d) {				//Sets the y value, based on the updated yScale
 							return h - yScale(d);
 						})
