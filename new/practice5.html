@@ -10,6 +10,27 @@ var a = [[100,100,0,0],[100,100,100,0],[100,100,0,100],[100,100,100,100]];
 
 for(var i = 0; i < a.length; i++) {
     if(a[i] >= [100, 100,100,100] && a[i] <= [100,100,100,100]) alert(i);
-}</script>
+}
+
+
+function checkDataset (arr, dataset){
+   
+    let result=false;
+
+for(var i = 0; i < dataset.length; i++) {               
+                    if(dataset[i] != newTopRightLeftBranch){ 
+                        result=false;
+                        return result; }
+                     else{
+                        result= true;
+                        return result;};
+                        }
+    if (result === true){
+        dataset.push(arr);
+    }
+                  
+}
+
+</script>
 
 </body>
