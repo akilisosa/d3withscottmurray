@@ -24,7 +24,6 @@
         
         
         
-           
         
         function mutateDataTopLeft(){
                                 let a = dataset;//get old data set
@@ -50,10 +49,26 @@
                         }
 
 
-        function mutateTopRightData(branchTopRightVariable){
+        function mutateTopRightData(branchTopRightCXVariable,branchTopRightCYVariable){
 
+            let topRightLeftBranch = [100, 100, branchTopRightCXVariable-100, branchTopRightCYVariable];
+            console.log("TopRightLEftBranchARray");
+            console.log(topRightLeftBranch);
             
-            
+
+                let a = topRightLeftBranch;
+                 let b = [0,0,100,0]
+                 let newTopRightLeftBranch = a.map(function(x,i){  //i don't know howthis works but i add datasets
+
+                                            return x+b[i];
+                                                                    
+                                                 });    
+            console.log(newTopRightLeftBranch); 
+                 
+
+
+             if(topRightLeftBranch[1]+topRightLeftBranch[3] === 100){
+
                     let a = dataset;//get old data set
                     let b = [0,100,0,0];//variable im going to change it by
                     let newDataset = a.map(function(x,i){  //i don't know howthis works but i add datasets
@@ -61,12 +76,22 @@
                                             return y+b[j];
                                                   });                  
                                                  });
-
-                    let topRightVariable = branchTopRightVariable;
-
-                    let topRightBranch = [100, 100, topRightVariable, 0];
-                                let topRightLeftBranch = [100,100,topRightVariable+100,0];
-                                let topRightBottomBranch = [100, 100, topRightVariable+100,100];
+             }
+             else 
+             { 
+                 
+                 let a = topRightBranch;
+                 let b = [0,0,100,0]
+                 let newTopRightLeftBranch = a.map(function(x,i){  //i don't know howthis works but i add datasets
+                                    return x.map(function(y,j){
+                                            return y+b[j];
+                                                  });                  
+                                                 });     
+                 
+             
+             }
+                          //      let topRightLeftBranch = [100,100,topRightVariable+100,0];
+                          //      let topRightBottomBranch = [100, 100, topRightVariable+100,100];
 
                 //that changed the old data set
                             newDataset.push(topRightBranch);  //then i add new datapoints
@@ -175,19 +200,20 @@
 						                    });
                                 
 
-        }
+        } 
     
         
  
         function topRightWeb(){
             
 
-var rightSideVariable = d3.select(this).attr("cx");
-     var branchTopRightVariable = Number(rightSideVariable);
-                        
+         var rightSideCXVariable = d3.select(this).attr("cx");
+         var branchTopRightCXVariable = Number(rightSideCXVariable);
 
-           console.log(branchTopRightVariable);
-                mutateTopRightData(branchTopRightVariable);
+         var rightSideCYVariable = d3.select(this).attr("cy");
+         var branchTopRightCYVariable = Number(rightSideCYVariable);
+          
+                mutateTopRightData(branchTopRightCXVariable,branchTopRightCYVariable);
                 console.log('#after mutatetop executes');
                  console.log(dataset);
 
