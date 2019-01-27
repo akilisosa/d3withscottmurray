@@ -22,25 +22,71 @@
 
         var dataset = [[100,100,0,0],[100,100,100,0],[100,100,0,100],[100,100,100,100]];
         
-        
+
         
             function checkDataset (arr, dataset){     
                       for (var i = 0; i < dataset.length; i++) {
-                           if (dataset[i] === arr) {
+                           if (
+                               ((dataset[i][0]+dataset[i][2] )=== (arr[0]+arr[2]))
+                            &&  ((dataset[i][1]+dataset[i][3]) == (arr[1]+arr[3])) ){
                                return true;
                                }
                               }
                              return false;
                                   }
                   
-        function mutateDataTopLeft(branchTopLeftCXVariable, branchTopLeftCYVariable){
-            let topLeftLeftBranch = [branchTopLeftCXVariable, branchTopLeftCYVariable, 0, 0];
-            let topLeftCenterBranch = [branchTopLeftCXVariable, branchTopLeftCYVariable,100,0];
-            let topLeftBottomBranch = [branchTopLeftCXVariable, branchTopLeftCYVariable,0,100];
+        function mutateDataTopLeft(numCXVariable, numCYVariable){
+            let leftCenterBranch = [numCXVariable-100, numCYVariable-100, 0, 0];
+            let leftRightBranch = [numCXVariable-100, numCYVariable-100,100,0];
+            let leftBottomBranch = [numCXVariable-100, numCYVariable-100,0,100];
+
+        if (checkDataset(leftCenterBranch,dataset)===false){
+                        dataset.push(leftCenterBranch);
+                        }        
+                       else{
+                            for (var i = 0; i < dataset.length; i++) {
+                                if (
+                               (dataset[i][0]+dataset[i][2] ) >= (arr[0]+arr[2])){
+
+                                let a = dataset;//get old data set
+                                let b = [100,0,0,0];//variable im going to change it by
+                                let newDataset = a.map(function(x,i){  //eachtime values are 
+                                                                         //greater that or equal to it
+                                return x.map(function(y,j){             //pushes it down. 
+                                        return y+b[j];
+                                              });                  
+                                             });
+                                return newDataset
+                               }
+                               if(
+                                (dataset[i][1]+dataset[i][3] ) >= (arr[1]+arr[3]) 
+                               ){
+                                let c = [0,100,0,0];//variable im going to change it by
+                                let newerDataset = newDataset.map(function(x,i){  
+                                return x.map(function(y,j){
+                                        return y+b[j];
+                                              });                  
+                                             });
+                                return newerDataset
+                               }
+                             return newerDataset;  
+                        }
                         
+                        dataset = newerDataset;
+                        dataset.push(leftCenterBranch);
+                        return dataset;
+                        }
+
                         
 
-        if((topLeftLeftBranch[1]+topLeftLeftBranch[3] === 100)&&(topLeftLeftBranch[0]+topLeftLeftBranch[2] === 100)){
+        if (checkDataset(leftRightBranch,dataset)===false){
+                        dataset.push(leftRightBranch);
+                        }   
+        if (checkDataset(leftBottomBranch,dataset)===false){
+                        dataset.push(leftBottomBranch);
+                        }             
+
+        if((leftCenterBranch[1]+leftCenterBranch[3] + leftCenterBranch[0]+leftCenterBranch[2] === 0)){
                 
                 let a = dataset;//get old data set
                 let b = [100,100,0,0];//variable im going to change it by
@@ -49,24 +95,11 @@
                                         return y+b[j];
                                               });                  
                                              }); 
-        
                  dataset = (newDataset);
-                        if (checkDataset(topLeftLeftBranch,dataset)===false){
-                        dataset.push(topLeftLeftBranch);
-                        }
-                        
-                        if (checkDataset(topLeftCenterBranch,dataset) === false)
-                        {
-                            dataset.push(topLeftCenterBranch);
-                        }
-                        if (checkDataset(topLeftBottomBranch,dataset) === false)
-                        {
-                            dataset.push(topLeftBottomBranch);
-                        }
+                
                         return dataset;
                     }
-
-        if(topLeftLeftBranch[1]+topLeftLeftBranch[3] === 100){
+        if((leftCenterBranch[0]+leftCenterBranch[2] === 0)){
                 
                 let a = dataset;//get old data set
                 let b = [100,0,0,0];//variable im going to change it by
@@ -75,93 +108,45 @@
                                         return y+b[j];
                                               });                  
                                              }); 
-        
                  dataset = (newDataset);
-                        if (checkDataset(topLeftLeftBranch,dataset)===false){
-                        dataset.push(topLeftLeftBranch);
-                        }
-                        
-                        if (checkDataset(topLeftCenterBranch,dataset) === false)
-                        {
-                            dataset.push(topLeftCenterBranch);
-                        }
-                        if (checkDataset(topLeftBottomBranch,dataset) === false)
-                        {
-                            dataset.push(topLeftBottomBranch);
-                        }
+                
                         return dataset;
                     }
-            if(topLeftLeftBranch[0]+topLeftLeftBranch[2] === 100){
+        if((leftCenterBranch[1]+leftCenterBranch[2] === 0)){
                 
                 let a = dataset;//get old data set
-                let b = [00,100,0,0];//variable im going to change it by
+                let b = [100,0,0,0];//variable im going to change it by
                 let newDataset = a.map(function(x,i){  //i don't know howthis works but i add datasets
                                 return x.map(function(y,j){
                                         return y+b[j];
                                               });                  
                                              }); 
-        
                  dataset = (newDataset);
-                        if (checkDataset(topLeftLeftBranch,dataset)===false){
-                        dataset.push(topLeftLeftBranch);
-                        }
-                        
-                        if (checkDataset(topLeftCenterBranch,dataset) === false)
-                        {
-                            dataset.push(topLeftCenterBranch);
-                        }
-                        if (checkDataset(topLeftBottomBranch,dataset) === false)
-                        {
-                            dataset.push(topLeftBottomBranch);
-                        }
+                
                         return dataset;
                     }
-                    else 
-                { 
-                 
-                     let a = topLeftLeftBranch;
-                     let b = [0,0,0,100]
-                     let newTopLeftLeftBranch = a.map(function(x,i){  //i don't know howthis works but i add datasets
-                                            return x-b[i];                       
-                                                 });
-                
-                     if(checkDataset(newTopLeftLeftBranch,dataset)===false){
-                          dataset.push(newTopLeftLeftBranch);
-                         };
-
-                    let c = topLeftCenterBranch;
-                    let newTopLeftCenterBranch = c.map(function(x,i){  //i don't know howthis works but i add datasets
-                                            return x-b[i];                       
-                                                 });
-
-                    if(checkDataset(newTopLeftCenterBranch,dataset)===false){
-                       dataset.push(newTopLeftCenterBranch);
-                   };
-
-                     let f = topLeftBottomBranch;
-                     let newTopLeftBottomBranch = f.map(function(x,i){  //i don't know howthis works but i add datasets
-                                            return x-b[i];                       
-                                                 });
-                    
-                    if(checkDataset(newTopLeftBottomBranch,dataset)===false){
-                       dataset.push(newTopLeftBottomBranch);
-                   };
 
 
-                   return dataset;    
-             
-             }
-                        
-        return dataset; 
-                }
 
-        function mutateTopRightData(branchTopRightCXVariable,branchTopRightCYVariable){
+                return dataset;
+        };
 
-            let topRightLeftBranch = [100, 100, branchTopRightCXVariable-100, branchTopRightCYVariable-100];
-            let topRightCenterBranch = [100,100,branchTopRightCXVariable, branchTopRightCYVariable-100];
-            let topRightBottomBranch = [100,100,branchTopRightCXVariable, branchTopRightCYVariable];
 
-             if(topRightLeftBranch[1]+topRightLeftBranch[3] === 100){
+        function mutateTopRightData(numCXVariable,numCYVariable){
+
+            let rightCenterBranch = [ 100, numCYVariable-100, numCXVariable,0 ];
+            let rightLeftBranch = [100,numCYVariable-100,numCXVariable-100, 0];
+            let rightBottomBranch = [100,numCYVariable,numCXVariable, 0];
+
+            if (checkDataset(rightCenterBranch,dataset)===false){
+                        dataset.push(rightCenterBranch);
+                        }   
+            if (checkDataset(rightLeftBranch,dataset)===false){
+                        dataset.push(rightLeftBranch);
+                        }   
+            if (checkDataset(rightBottomBranch,dataset)===false){
+                        dataset.push(rightBottomBranch);
+                        }      
                 
                     let a = dataset;//get old data set
                     let b = [0,100,0,0];//variable im going to change it by
@@ -169,62 +154,14 @@
                                     return x.map(function(y,j){
                                             return y+b[j];
                                                   });                  
-                                                 }); 
-                      
-                        dataset = (newDataset);
-                        if (checkDataset(topRightLeftBranch,dataset)===false){
-                        dataset.push(topRightLeftBranch);
-                        }
-                        
-                        if (checkDataset(topRightCenterBranch,dataset) === false)
-                        {
-                            dataset.push(topRightCenterBranch);
-                        }
-                        if (checkDataset(topRightBottomBranch,dataset) === false)
-                        {
-                            dataset.push(topRightBottomBranch);
-                        }
-                        return dataset;
-                    }
-             else 
-                { 
-                 
-                     let a = topRightLeftBranch;
-                     let b = [0,0,0,100]
-                     let newTopRightLeftBranch = a.map(function(x,i){  //i don't know howthis works but i add datasets
-                                            return x-b[i];                       
-                                                 });
-                
-                     if(checkDataset(newTopRightLeftBranch,dataset)===false){
-                          dataset.push(newTopRightLeftBranch);
-                         };
-
-                    let c = topRightCenterBranch;
-                    let newTopRightCenterBranch = c.map(function(x,i){  //i don't know howthis works but i add datasets
-                                            return x-b[i];                       
-                                                 });
-
-                    if(checkDataset(newTopRightCenterBranch,dataset)===false){
-                       dataset.push(newTopRightCenterBranch);
-                   };
-
-                     let f = topRightBottomBranch;
-                     let newTopRightBottomBranch = f.map(function(x,i){  //i don't know howthis works but i add datasets
-                                            return x-b[i];                       
-                                                 });
-                    
-                    if(checkDataset(newTopRightBottomBranch,dataset)===false){
-                       dataset.push(newTopRightBottomBranch);
-                   };
+                                                 });                   
+                        dataset = newDataset;
+                    return dataset;
+        }
 
 
-                   return dataset;    
-             
-             }
-                        
-        return dataset; 
-                }
-        
+
+
            
            function buildWeb(){
 
@@ -252,22 +189,54 @@
                                             .attr("id", function(d,i){
                                                return "circle" +i;
                                            });
-                                       
 
 
+               
+
+//puts on the event listeners
+
+            var topLeftCircle = svg.select("#circle0")
+                                    .attr("fill","green");
+                 topLeftCircle.on("click", topLeftWeb);
+            
+            var topRightCircle = svg.select("#circle1")
+                                    .attr("fill","red");
+                 topRightCircle.on("click", topRightWeb);
+                                  
+            var bottomRightCircle = svg.select("#circle2")
+                                    .attr("fill","orange");
+                 //bottomRightCircle.on("click", bottomRightWeb);
+
+            var bottomLeftCircle = svg.select("#circle3")
+                                    .attr("fill","purple");
+                // bottomLefttCircle.on("click", bottomLeftWeb);
+
+        
                 
-                   function drawTopLeftWeb(){                     
+                   
+
+           
+//this is all newsted in this function because of the stupid datwset initiate. maybe i should make this what happens when you draw web. 
+           function drawWeb(dataset){                     
+                           
                            var clicked = svg.selectAll("circle")	//Select all circles
                                            .data(dataset);	//this keeps all the circles with their old id's 
                              clicked.enter()  //then it updates everything
                                     .append("circle")
-                                    .attr("r", 15)
+                                    .attr("r", 1)
                                     .attr("id", function(d,i){
                                          return "circle" +i; 
-                                         })          
+                                         })
+                                    .attr("cx", function(d, i) {		//Set new x position, based on the updated xScale
+                                      return d[0]+d[2];
+                                      })
+                                    .attr("cy", function(d) {		//Set new y position, based on the updated yScale
+                                      return d[1]+d[3];
+                                      })        
                           .merge(clicked)				//Merges the enter selection with the update selection
                               .transition()				//Initiate a transition on all elements in the update selection (all rects)
                               .duration(1500)
+                              .attr("r", 15)
                                   .attr("cx", function(d, i) {		//Set new x position, based on the updated xScale
                                       return d[0]+d[2];
                                       })
@@ -276,119 +245,60 @@
                                       });
                                    }
 
+           
+/* this part didn't work but for those of you... that can see this is obviously important 
+                    function thisXposition(){
+                        var CXVariable = d3.select(this).attr("cx");
+                     var numCXVariable = Number(CXVariable);
+                     return numCXVariable;
+                    }
+
+
+                    function thisYposition(){
+                    var CYVariable = d3.select(this).attr("cy");
+                    var numCYVariable = Number(CYVariable);
+                        return numYVariable;
+                    }
+*/
             function topLeftWeb(){
+                //repeated function parts
+                    var CXVariable = d3.select(this).attr("cx");
+                     var numCXVariable = Number(CXVariable);
+                   
+                     var CYVariable = d3.select(this).attr("cy");
+                     var numCYVariable = Number(CYVariable);
+                       
+                               
+            mutateDataTopLeft(numCXVariable,numCYVariable);
 
-        var leftSideCXVariable = d3.select(this).attr("cx");
-         var branchTopLeftCXVariable = Number(leftSideCXVariable);
-
-         var leftSideCYVariable = d3.select(this).attr("cy");
-         var branchTopLeftCYVariable = Number(leftSideCYVariable);
-               
-            mutateDataTopLeft(branchTopLeftCXVariable,branchTopLeftCYVariable);
-                        
-                drawTopLeftWeb();
-                            
+                drawWeb(dataset);              
                     let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -3))
                     .attr("fill","green")
                     .on("click", topLeftWeb);
-                            }
-
-        function drawTopRightWeb(){
-                        var clicked = svg.selectAll("circle")			//Select all bars
-                               .data(dataset);	//this keeps all the circles with their old id's 
-
-           
-       
-                                 clicked.enter()  //then it updates everything
-                                 .append("circle")
-                                 .attr("r", 15)
-                                 .attr("id", function(d,i){
-                                           return "circle" +i;
-                                               })
-                                .merge(clicked)							//Merges the enter selection with the update selection
-						            .transition()							//Initiate a transition on all elements in the update selection (all rects)
-						            .duration(1500)
-					        	        .attr("cx", function(d, i) {				//Set new x position, based on the updated xScale
-							                return d[0]+d[2];
-						                    })
-						                .attr("cy", function(d) {				//Set new y position, based on the updated yScale
-							                return d[1]+d[3];
-						                    });
-                                
-
-        } 
-    
+                            }  
         
  
         function topRightWeb(){
             
-
-         var rightSideCXVariable = d3.select(this).attr("cx");
-         var branchTopRightCXVariable = Number(rightSideCXVariable);
-
-         var rightSideCYVariable = d3.select(this).attr("cy");
-         var branchTopRightCYVariable = Number(rightSideCYVariable);
+            var CXVariable = d3.select(this).attr("cx");
+                     var numCXVariable = Number(CXVariable);
+                   
+                     var CYVariable = d3.select(this).attr("cy");
+                     var numCYVariable = Number(CYVariable);
           
 
-                mutateTopRightData(branchTopRightCXVariable,branchTopRightCYVariable);
+                mutateTopRightData(numCXVariable,numCYVariable);
                 console.log('#after mutatetop executes');
                  console.log(dataset);
 
-                    drawTopRightWeb();
+                    drawWeb(dataset);
                     
                              let newTopRightCircle = svg.select("#circle"+ ( dataset.length -2))
                                             .attr("fill","green")
                                             .on("click", topRightWeb);
                                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //creates the canvas
-               
-                   
-//this one is the top right circle that builds web out like a r shape
-            var topLeftCircle = svg.select("#circle0")
-                                    .attr("fill","green");
-//build more web
-            topLeftCircle.on("click", topLeftWeb);
-            
-       
-
-            var topRightCircle = svg.select("#circle1")
-                                    .attr("fill","red");
-
-            topRightCircle.on("click", topRightWeb);
-                                  
-
-
-            var bottomRightCircle = svg.select("#circle2")
-                                    .attr("fill","orange");
-
-            
-
-            var bottomLeftCircle = svg.select("#circle3")
-                                    .attr("fill","purple");
-
-
-
-
-            };
-        //your beautiful D3 code will go here
+                            };
         </script>
     </body>
 </html>
