@@ -8,6 +8,7 @@
         <style>
         svg{
             background-color:gray;
+            opacity: 0.5;
         }
 
         circle{
@@ -77,14 +78,17 @@
                         return dataset;
                         }
 
-                        
+
 
         if (checkDataset(leftRightBranch,dataset)===false){
                         dataset.push(leftRightBranch);
                         }   
         if (checkDataset(leftBottomBranch,dataset)===false){
                         dataset.push(leftBottomBranch);
-                        }             
+                        }       
+
+
+//these are basic if staments if the object is on the outer egdges of everything. this needs to be a function. 
 
         if((leftCenterBranch[1]+leftCenterBranch[3] + leftCenterBranch[0]+leftCenterBranch[2] === 0)){
                 
@@ -270,11 +274,15 @@
                        
                                
             mutateDataTopLeft(numCXVariable,numCYVariable);
-
+//needs a check to see how many dataspoints to add
                 drawWeb(dataset);              
-                    let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -3))
+                    let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -2))
                     .attr("fill","green")
                     .on("click", topLeftWeb);
+
+            let newTopRightCenterCircle = svg.select("#circle"+ ( dataset.length -1))
+                                            .attr("fill","red")
+                                            .on("click", topRightWeb);
                             }  
         
  
@@ -292,10 +300,15 @@
                  console.log(dataset);
 
                     drawWeb(dataset);
-                    
-                             let newTopRightCircle = svg.select("#circle"+ ( dataset.length -2))
-                                            .attr("fill","green")
+                    //needs to be a check to see how many datapoints to add. 
+
+                         let newTopRightCenterCircle = svg.select("#circle"+ ( dataset.length -2))
+                                            .attr("fill","red")
                                             .on("click", topRightWeb);
+                                
+                            let newTopLeftCircle = svg.select("#circle"+ ( dataset.length -1))
+                                            .attr("fill","green")
+                                            .on("click", topLeftWeb);
                                 }
 
                             };
