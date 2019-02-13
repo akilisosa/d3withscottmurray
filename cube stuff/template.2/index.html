@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Akili Sosa, Alberto Sosa, ak">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Sosa Studios:The Studio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/animation.css">
+  <link rel="stylesheet" type="text/css" href="css.css">
+    <!-- Custom styles for this template -->
+  </head>
+
+
+  <body>
+    <header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">This is Akili's studio their more personal part of the web. In it you can find some of the services we offer, artwork, and more.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="../index.html" class="navbar-brand d-flex align-items-center">
+        <div class="anim-object active" id="card-object-vf" style="animation: rotate-vert-center 4s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s infinite normal forwards running;">
+          <img src="../images/sosaanimationstudios/logo/sosawhite.svg" width="30" height="30" alt="">
+          </div>
+      
+        <strong style="padding-left:5px"> Sosa Studios</strong>
+      </a>
+        
+
+        
+     
+        
+
+    </div>
+  </div>
+</header>
+
+    
+          
+     
+        <script src="script.js" >
+        
+        </script>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+          <div class="col">
+
+              <ul class="nav flex-sm-column">
+                  <li class="nav-item">
+                    <a class="nav-link col-md-4 active" href="#">Grinch</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link  col-md-4 " href="#">more comming soon</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link col-md-4 " href="#">sometime soon... </a>
+                  </li>
+                </ul>
+            
+          </div>
+
+
+
+
+
+
+          
+          <div class="col-12 col-sm-6 col-lg-8">
+            2 of 3 (wider)
+         
+
+  <div class="scene">
+    <div class="cube">
+      <div class="cube__face cube__face--front"><img src="../images/bitmap.png" height="100%" width="100%" alt="Girl in a jacket"></div>
+      <div class="cube__face cube__face--back">back</div>
+      <div class="cube__face cube__face--right">right</div>
+      <div class="cube__face cube__face--left">left</div>
+      <div class="cube__face cube__face--top">top</div>
+      <div class="cube__face cube__face--bottom">bottom</div>
+    </div>
+  </div>
+
+
+
+
+  <div class="nav-scroller py-1 mb-2">
+      <nav class="nav radio-group d-flex justify-content-between">
+        <a class="p-2 text-muted"><label>
+            <input type="radio" hidden="true" name="rotate-cube-side" value="front" checked> front
+          </label></a>
+
+
+        <a class="p-2 text-muted"><label>
+            <input type="radio" name="rotate-cube-side" hidden="true" value="right" /> right
+          </label></a>
+
+
+        <a class="p-2 text-muted"><label>
+            <input type="radio" name="rotate-cube-side" hidden="true" value="back" /> back
+          </label></a>
+
+        <a class="p-2 text-muted" ><label>
+      <input type="radio" name="rotate-cube-side" hidden="true"  value="left" /> left
+    </label></a>
+        <a class="p-2 text-muted"><label>
+            <input type="radio" name="rotate-cube-side" hidden="true" value="top" /> top
+          </label></a>
+        <a class="p-2 text-muted"><label>
+            <input type="radio" name="rotate-cube-side" hidden="true" value="bottom" /> bottom
+          </label></a>
+        <a class="p-2 text-muted" href="#"></a>
+      </nav>
+    </div>
+  
+ 
+
+</div>
+<div class="p-4 mb-3 bg-light rounded">
+    <h4 class="font-italic">About</h4><em></em>
+    <p class="mb-0"> The Holiday Extravaganza!  Designed with <em>APAIT/TWC</em> population in mind. These fun handouts set the mood, and allowed all to remenice of a simpler time while remaining fresh and relavent. </p>
+  </div>
+
+</div>
+</div>
+  <script>
+  
+  var cube = document.querySelector('.cube');
+var radioGroup = document.querySelector('.radio-group');
+var currentClass = '';
+
+function changeSide() {
+  var checkedRadio = radioGroup.querySelector(':checked');
+  var showClass = 'show-' + checkedRadio.value;
+  if ( currentClass ) {
+    cube.classList.remove( currentClass );
+  }
+  cube.classList.add( showClass );
+  currentClass = showClass;
+}
+// set initial side
+changeSide();
+
+radioGroup.addEventListener( 'change', changeSide );
+
+  </script>
+
+<footer class="footer fixed-bottom" style="background-color:#f3f3f3">
+    <div class="container">
+      <span class="text-muted"> <div class="footer-copyright text-center py-3">© 2019 Copyright:
+  <a href="https://www.sosaanimationstudios.com"> sosaanimationstudios.com</a>
+  <a href="../webpages/terms.html">  terms of service. </a>
+</div></span>
+    </div>
+  </footer>
+
+  </body>
+  </html>
